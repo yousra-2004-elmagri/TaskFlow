@@ -12,7 +12,7 @@ app.use("/api/projects", require("./routes/projects"));
 app.use("/api/tasks", require("./routes/tasks"));
 app.use("/api/dashboard", require("./routes/dashboard"));
 
-mongoose.connect("mongodb://mongo:27017/taskflow")
+mongoose.connect("mongodb://127.0.0.1:27017/taskflow")
   .then(() => console.log("✅ MongoDB connected"))
   .catch(err => console.log("❌ MongoDB error:", err));
 
