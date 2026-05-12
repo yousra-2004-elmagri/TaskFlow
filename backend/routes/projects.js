@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Project = require("../models/Project");
 const Task = require("../models/Task");
-const auth = require("../middleware/auth");
+const auth = require("../middleware/authMiddleware");
 
 // جلب كل المشاريع
 router.get("/", auth, async (req, res) => {
