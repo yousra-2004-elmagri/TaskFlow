@@ -83,4 +83,19 @@ router.post("/:id/members", auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+// حذف عضو
+router.delete("/:id/members/:userId", auth, async (req, res) => {
+  try {
+    const project = await Project.findOneAndUpdate(
+      { _id: req.params.id, owner: req.user.id },
+      { $pull: { members: req.params.userId } },
+      { new: true }
+    );
+    if (!project) return res.status(404).json({ message: "Not found or not authorized" });
+    res.json({ message: "Member removed", project });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+module.exports = router;                                                                                 

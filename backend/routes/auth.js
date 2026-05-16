@@ -2,7 +2,6 @@ const express = require('express');
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 // التسجيل
 router.post("/register", async (req, res) => {
   try {
