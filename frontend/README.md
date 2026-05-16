@@ -1,22 +1,22 @@
-# 🚀 TaskFlow
+#  TaskFlow
 
 Application web fullstack de gestion de projets collaboratifs.
 
-## 👥 Équipe
+##  Équipe
 - Membre 1 — Authentification
 - Membre 2 — Projets
 - Membre 3 — Tâches
 - Membre 4 — Dashboard
 - Membre 5 — Docker & GitHub
 
-## 🛠 Technologies
+##  Technologies
 - **Frontend**: HTML, CSS, JavaScript, Axios
 - **Backend**: Node.js, Express.js
 - **Base de données**: MongoDB (Docker)
 - **Auth**: JWT
 - **Conteneurisation**: Docker & Docker Compose
 
-## 🚀 Lancer le projet
+##  Lancer le projet
 
 ### Prérequis
 - Docker Desktop
@@ -33,12 +33,12 @@ docker-compose up --build
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000
 
-## 📋 Fonctionnalités
+##  Fonctionnalités
 - ✅ Inscription et connexion (JWT)
 - ✅ Création et gestion des projets
 - ✅ Gestion des tâches avec priorités
 - ✅ Tableau de bord personnel
 - ✅ Suppression en cascade
 
-## 🔗 GitHub
+##  GitHub
 https://github.com/radyacharib-cpu/taskflow
