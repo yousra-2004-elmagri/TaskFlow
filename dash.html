@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskFlow - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="task.html">Mes Tâches</a>
+        </nav>
+
+        <header>
+            <h1 style="margin-bottom: 30px;">Aperçu de l'activité</h1>
+        </header>
+
+        <div class="grid-stats">
+            <div class="card">
+                <div class="stat-item">
+                    <p class="stat-label">Projets Actifs</p>
+                    <h3 id="stat-projects" class="stat-value">0</h3>
+                </div>
+            </div>
+            <div class="card">
+                <div class="stat-item">
+                    <p class="stat-label">Tâches Assignées</p>
+                    <h3 id="stat-assigned" class="stat-value">0</h3>
+                </div>
+            </div>
+            <div class="card">
+                <div class="stat-item">
+                    <p class="stat-label">Terminées</p>
+                    <h3 id="stat-completed" class="stat-value" style="color: #05CD99;">0</h3>
+                </div>
+            </div>
+            <div class="card">
+                <div class="stat-item">
+                    <p class="stat-label">En Retard</p>
+                    <h3 id="stat-late" class="stat-value" style="color: #EE5D50;">0</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 style="font-size: 20px; margin-bottom: 20px;">Priorités du moment</h2>
+            <div id="priority-container">
+                </div>
+        </div>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>
