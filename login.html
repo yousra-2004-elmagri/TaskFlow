@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskFlow - Connexion</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f6f9; }
+        .login-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        button { background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Connexion à TaskFlow</h2>
+        <p>Cliquez pour simuler une connexion et accéder au Dashboard.</p>
+        <!-- Ce bouton va créer un faux token pour vous laisser passer -->
+        <button onclick="simulerConnexion()">Se connecter</button>
+    </div>
+
+    <script>
+        function simulerConnexion() {
+            localStorage.setItem('token', 'mon_faux_token_de_test');
+            window.location.href = 'dash.html';
+        }
+    </script>
+</body>
+</html>
