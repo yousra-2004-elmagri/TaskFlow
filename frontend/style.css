@@ -98,7 +98,54 @@ nav button {
   margin: 30px auto;
   padding: 0 20px;
 }
-
+.activity-container{
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-family: sans-serif; 
+  width: 100%;
+   box-sizing: border-box;
+}
+ .activity-title{
+  color: #333333; 
+  margin-top: 0;
+  margin-bottom: 15px; 
+  font-size: 1.2rem; 
+  border-bottom: 2px solid #eeeeee;
+  padding-bottom: 8px;
+}
+.activity-TABLE {
+ overflow-x: auto;
+}
+.activity-table{
+  width: 100%; 
+  border-collapse: collapse; 
+  text-align: left;
+  min-width: 500px;
+}
+.activity-table tr {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+.activity-table th {
+  padding: 12px 10px;
+  color: #495057;
+  font-weight: 600;
+}
+.activity-table td {
+  text-align: center; 
+  padding: 15px;
+  color: #888888; 
+  font-style: italic;
+}
+.activity-action--badge{
+  background: color #e9ecef;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
 /* Stats */
 .stats {
   display: grid;
