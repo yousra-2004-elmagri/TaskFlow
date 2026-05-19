@@ -33,55 +33,79 @@
   </div>
 
   <!-- الداشبورد -->
-  <div id="dashboard-page" style="display:none">
-    <nav>
-      <h1>🚀 TaskFlow</h1>
-      <div>
-        <span id="user-name"></span>
-        <button onclick="logout()">Déconnexion</button>
-      </div>
-    </nav>
-
-    <div class="container">
-      <!-- الإحصائيات -->
-      <div class="stats">
-        <div class="stat-card">
-          <h3 id="stat-projects">0</h3>
-          <p>Projets actifs</p>
-        </div>
-        <div class="stat-card">
-          <h3 id="stat-tasks">0</h3>
-          <p>Tâches assignées</p>
-        </div>
-        <div class="stat-card">
-          <h3 id="stat-done">0</h3>
-          <p>Tâches terminées</p>
-        </div>
-        <div class="stat-card">
-          <h3 id="stat-late">0</h3>
-          <p>Tâches en retard</p>
-        </div>
-      </div>
-
-      <!-- المشاريع -->
-      <div class="section">
-        <div class="section-header">
-          <h2>Mes Projets</h2>
-          <button onclick="showProjectForm()">+ Nouveau projet</button>
-        </div>
-
-        <div id="project-form" style="display:none" class="form-box">
-          <input type="text" id="proj-title" placeholder="Titre du projet">
-          <input type="text" id="proj-desc" placeholder="Description">
-          <input type="date" id="proj-deadline">
-          <button onclick="createProject()">Créer</button>
-          <button onclick="hideProjectForm()">Annuler</button>
-        </div>
-
-        <div id="projects-list"></div>
-      </div>
-    </div>
+<div id="dashboard-page" style="display:none">
+  <nav>
+  <h1>🚀 TaskFlow</h1>
+  <div>
+  <span id="user-name"></span>
+  <button onclick="logout()">Déconnexion</button>
   </div>
+  </nav>
+  <div class="container">
+  <div id="activity-section" class="activity-container">
+      <h3 class="activity-title">
+         Historique des Activités
+      </h3>
+  <div class="activity-TABLE" >
+
+   <table  class="activity-table">
+  <thead>
+  <tr >
+  <th >Utilisateur</th>
+  <th >Action</th>
+  <th >Date et Heure</th>
+  </tr>
+  </thead>
+  <tbody id="activity-table-body">
+  <tr>
+  <td colspan="3" class="activity-chargement" >
+  Chargement des activités...
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  </div> 
+  </div> 
+
+        <!-- الإحصائيات -->
+        <div class="stats">
+          <div class="stat-card">
+            <h3 id="stat-projects">0</h3>
+            <p>Projets actifs</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="stat-tasks">0</h3>
+            <p>Tâches assignées</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="stat-done">0</h3>
+            <p>Tâches terminées</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="stat-late">0</h3>
+            <p>Tâches en retard</p>
+          </div>
+        </div>
+
+        <!-- المشاريع -->
+        <div class="section">
+          <div class="section-header">
+            <h2>Mes Projets</h2>
+            <button onclick="showProjectForm()">+ Nouveau projet</button>
+          </div>
+
+          <div id="project-form" style="display:none" class="form-box">
+            <input type="text" id="proj-title" placeholder="Titre du projet">
+            <input type="text" id="proj-desc" placeholder="Description">
+            <input type="date" id="proj-deadline">
+            <button onclick="createProject()">Créer</button>
+            <button onclick="hideProjectForm()">Annuler</button>
+          </div>
+
+          <div id="projects-list"></div>
+        </div>
+  </div>
+</div>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="app.js"></script>

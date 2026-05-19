@@ -173,6 +173,7 @@ async function loadTasks(projectId, projectTitle) {
         </div>
       `;
     });
+     await fetchAndDisplayActivities(projectId);
   } catch (err) {
     console.log(err);
   }
@@ -254,3 +255,44 @@ function updateBadge() {
 }
 
 setInterval(loadNotifications, 30000);
+//Récupérer et afficher l'historique des activités d'un projet
+async function fetchAndDisplayActivities(projectId) {
+try {
+  const token = localStorage.getItem('token'); 
+  const response = await fetch(`http://localhost:5000/api/activities/${projectId}`, {
+  method: 'GET',
+  headers: {
+  'Authorization': `Bearer ${token}`,
+  'Content-Type': 'application/json'
+}
+});
+
+if (!response.ok) throw new Error("Erreur lors du chargement des activités");
+
+  const activities = await response.json();
+  const tbody = document.getElementById('activity-table-body');
+
+  if (tbody) {
+  tbody.innerHTML = ''; 
+
+  if (activities.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="3" class="activity-loading">Aucune activité enregistrée.</td></tr>`;
+    return;
+}
+
+activities.forEach(act => {
+  const tr = document.createElement('tr');
+  const dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  const dateFormatee = new Date(act.timestamp).toLocaleDateString('fr-FR', dateOptions);
+tr.innerHTML = `
+<td><strong>${act.utilisateur ? act.utilisateur.name : 'Inconnu'}</strong></td>
+<td><span class="activity-action-badge">${act.action}</span></td>
+<td style="color: #6c757d;">${dateFormatee}</td>
+`;
+tbody.appendChild(tr);
+});
+}
+} catch (error) {
+console.error("Erreur Mission 9:", error);
+}
+}
