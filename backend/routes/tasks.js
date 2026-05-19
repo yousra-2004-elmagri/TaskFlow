@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Task = require("../models/Task");
-const authMiddleware = require("../middleware/auth");
+const authMiddleware = require("../middleware/authMiddleware");
 const validateTask = require("../middleware/validateTask");
 
 // GET toutes les tâches d'un projet => /api/projects/:id/tasks
@@ -26,7 +26,6 @@ router.get("/:id", authMiddleware, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
 // POST créer une tâche
 router.post("/", authMiddleware, validateTask, async (req, res) => {
   try {
@@ -97,7 +96,6 @@ router.delete("/:id", authMiddleware, async (req, res) => {
   }
 });
 
-module.exports = router;
 // GET tâches assignées à l'utilisateur connecté (dashboard F4)
 router.get("/assigned/me", authMiddleware, async (req, res) => {
   try {
@@ -110,4 +108,5 @@ router.get("/assigned/me", authMiddleware, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-module.exports = router;
+
+module.exports = router; 
