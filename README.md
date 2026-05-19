@@ -1,8 +1,13 @@
-* feature/dashboard — Tableau de bord personnel
-Espace analytique résumant l'activité de l'utilisateur connecté sur TaskFlow.
+*feature/filtrage — Filtrage, recherche et pagination
 
-* Technique & API
-**Route** : `GET /api/dashboard` (un seul appel Axios au chargement).
-**Back-end** : Pipeline d'agrégation MongoDB (`$match`, `$group`, `$count`).
-**Tri des tâches** : Priorité décroissante, puis date limite croissante.
-**Calcul du retard** : Date limite dépassée ET statut différent de "terminé".
+Moteur de recherche et navigation pour filtrer les tâches d'un projet depuis l'interface.
+
+*Technique & API
+
+**Route** : `GET /api/projects/:id/tasks` (avec paramètres *query params*).
+
+**Recherche** : Recherche textuelle par mot-clé avec `$regex` (option `i` insensible à la casse).
+
+**Filtres dynamiques** : Filtrage conditionnel Mongoose par statut, priorité et membre assigné.
+
+**Pagination & UI** : Réponse JSON (`data`, `total`, `page`, `totalPages`) pour piloter les contrôles de navigation.
