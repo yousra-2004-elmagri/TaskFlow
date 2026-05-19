@@ -56,6 +56,7 @@ async function showDashboard() {
   document.getElementById("user-name").textContent = user.name;
   await loadDashboard();
   await loadProjects();
+  await loadNotifications();
 }
 
 async function loadDashboard() {
@@ -75,6 +76,7 @@ async function loadDashboard() {
 // ===== PROJECTS =====
 function showProjectForm() {
   document.getElementById("project-form").style.display = "block";
+  restoreProjectDraft();
 }
 
 function hideProjectForm() {
@@ -113,6 +115,7 @@ async function createProject() {
     await axios.post(`${API}/projects`, { title, description, deadline }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     });
+    localStorage.removeItem("draft-project");
     hideProjectForm();
     await loadProjects();
   } catch (err) {
@@ -129,6 +132,32 @@ async function deleteProject(id) {
     await loadProjects();
   } catch (err) {
     alert("Erreur");
+  }
+}
+
+// ===== FONCTIONNALITÉ 7 — BROUILLONS =====
+document.addEventListener("input", (e) => {
+  if (e.target.closest("#project-form")) {
+    const draft = {
+      title: document.getElementById("proj-title")?.value,
+      desc: document.getElementById("proj-desc")?.value,
+      deadline: document.getElementById("proj-deadline")?.value
+    };
+    localStorage.setItem("draft-project", JSON.stringify(draft));
+  }
+});
+
+function restoreProjectDraft() {
+  const raw = localStorage.getItem("draft-project");
+  if (!raw) return;
+  const draft = JSON.parse(raw);
+  const restore = confirm("لديك مسودة محفوظة، هل تريد استرجاعها؟");
+  if (restore) {
+    document.getElementById("proj-title").value = draft.title || "";
+    document.getElementById("proj-desc").value = draft.desc || "";
+    document.getElementById("proj-deadline").value = draft.deadline || "";
+  } else {
+    localStorage.removeItem("draft-project");
   }
 }
 
@@ -185,8 +214,7 @@ async function createTask(projectId) {
     await axios.post(`${API}/tasks`, { title, priority, project: projectId }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     });
-    const proj = document.querySelector(".project-card h3");
-    loadTasks(projectId, proj?.textContent || "");
+    loadTasks(projectId, "");
   } catch (err) {
     alert("Erreur");
   }
@@ -213,26 +241,7 @@ async function deleteTask(taskId, projectId, projectTitle) {
   }
 }
 
-// ===== تحقق من التوكن عند التحميل =====
-window.onload = () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    showDashboard();
-  }
-};
-// الوظيفة 7 — حفظ تلقائي
-document.addEventListener("input", (e) => {
-  if (e.target.closest("#project-form")) {
-    const draft = {
-      title: document.getElementById("proj-title")?.value,
-      desc: document.getElementById("proj-desc")?.value,
-      deadline: document.getElementById("proj-deadline")?.value
-    };
-    localStorage.setItem("draft-project", JSON.stringify(draft));
-  }
-});
-
-// الوظيفة 10 — الإشعارات
+// ===== FONCTIONNALITÉ 10 — NOTIFICATIONS =====
 let notifications = [];
 
 async function loadNotifications() {
@@ -242,6 +251,7 @@ async function loadNotifications() {
     });
     notifications = res.data;
     updateBadge();
+    renderNotifications();
   } catch (err) {
     console.log(err);
   }
@@ -253,4 +263,39 @@ function updateBadge() {
   if (badge) badge.textContent = unread > 0 ? unread : "";
 }
 
+function renderNotifications() {
+  const container = document.getElementById("notif-list");
+  if (!container) return;
+  container.innerHTML = "";
+  notifications.forEach(n => {
+    container.innerHTML += `
+      <div class="notif-item ${n.read ? "" : "unread"}" onclick="markAsRead('${n._id}')">
+        <span>${n.message}</span>
+      </div>
+    `;
+  });
+}
+
+async function markAsRead(id) {
+  try {
+    await axios.patch(`${API}/notifications/${id}/read`, {}, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    });
+    const n = notifications.find(n => n._id === id);
+    if (n) n.read = true;
+    updateBadge();
+    renderNotifications();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 setInterval(loadNotifications, 30000);
+
+
+window.onload = () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    showDashboard();
+  }
+};

@@ -8,10 +8,9 @@
 </head>
 <body>
 
-  <!-- صفحة اللوجين -->
   <div id="auth-page">
     <div class="auth-box">
-      <h1>🚀 TaskFlow</h1>
+      <h1> TaskFlow</h1>
 
       <div id="login-form">
         <h2>Connexion</h2>
@@ -32,18 +31,30 @@
     </div>
   </div>
 
-  <!-- الداشبورد -->
   <div id="dashboard-page" style="display:none">
     <nav>
-      <h1>🚀 TaskFlow</h1>
-      <div>
-        <span id="user-name"></span>
-        <button onclick="logout()">Déconnexion</button>
-      </div>
+      <h1> TaskFlow</h1>
+     <div>
+  <span id="user-name"></span>
+  <span style="position:relative; cursor:pointer; margin-right:15px" onclick="fetchNotifications()">
+    <span id="notification-badge" style="
+      display:none;
+      position:absolute;
+      top:-8px;
+      right:-8px;
+      background:red;
+      color:white;
+      border-radius:50%;
+      padding:2px 6px;
+      font-size:12px;
+    ">0</span>
+  </span>
+  <button onclick="logout()">Déconnexion</button>
+</div>
     </nav>
 
     <div class="container">
-      <!-- الإحصائيات -->
+  
       <div class="stats">
         <div class="stat-card">
           <h3 id="stat-projects">0</h3>
@@ -63,7 +74,6 @@
         </div>
       </div>
 
-      <!-- المشاريع -->
       <div class="section">
         <div class="section-header">
           <h2>Mes Projets</h2>
@@ -83,7 +93,8 @@
     </div>
   </div>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="app.js"></script>
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="notifications.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
