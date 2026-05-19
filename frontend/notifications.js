@@ -1,4 +1,4 @@
-let notifications = [];
+let notificationsList = [];
 
 async function fetchNotifications() {
   const token = localStorage.getItem('token');
@@ -9,7 +9,7 @@ async function fetchNotifications() {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    notifications = response.data;
+    notificationsList = response.data;
     updateBadge();
     archiveReadNotifications();
   } catch (err) {
@@ -18,7 +18,7 @@ async function fetchNotifications() {
 }
 
 function updateBadge() {
-  const unread = notifications.filter(n => !n.isRead).length;
+  const unread = notificationsList.filter(n => !n.isRead).length;
   const badge = document.getElementById('notification-badge');
   if (badge) {
     badge.textContent = unread;
@@ -39,7 +39,7 @@ async function markAsRead(id) {
 }
 
 function archiveReadNotifications() {
-  const read = notifications.filter(n => n.isRead);
+  const read = notificationsList.filter(n => n.isRead);
   localStorage.setItem('archivedNotifications', JSON.stringify(read));
 }
 

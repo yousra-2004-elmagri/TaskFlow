@@ -10,9 +10,10 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/projects", require("./routes/projects"));
 app.use("/api/tasks", require("./routes/tasks"));
+app.use("/api/notifications", require("./routes/notifications"));
 app.use("/api/dashboard", require("./routes/dashboard"));
 
-mongoose.connect("mongodb://127.0.0.1:27017/taskflow")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
   .catch(err => console.log("❌ MongoDB error:", err));
 
