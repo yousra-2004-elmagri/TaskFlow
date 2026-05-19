@@ -1,23 +1,15 @@
-version: "3.8"
+
 services:
+  # Écran Frontend (Vos pages HTML/JS)
+  frontend:
+    build: ./Frontend  # Nom exact de votre dossier frontend
+    ports:
+      - "8080:80"       # Accès au site sur http://localhost:8080
+    restart: always
+
+  # Serveur Backend (Votre API Node.js)
   backend:
-    build: ./backend
+    build: ./Backend   # Nom exact de votre dossier backend
     ports:
-      - "5000:5000"
-    env_file:
-      - ./backend/.env
-    depends_on:
-      - mongo
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-
-  mongo:
-    image: mongo:6
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-
-volumes:
-  mongo_data:
+      - "3000:3000"     # Accès à l'API sur http://localhost:3000
+    restart: always
