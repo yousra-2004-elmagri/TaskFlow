@@ -4,7 +4,7 @@ const Task = require("../models/Task");
 const authMiddleware = require("../middleware/auth");
 const validateTask = require("../middleware/validateTask");
 
-// GET toutes les tâches d'un projet => /api/projects/:id/tasks
+// GET toutes les tâches d'un projet 
 router.get("/project/:projectId", authMiddleware, async (req, res) => {
   try {
     const tasks = await Task.find({ project: req.params.projectId })
@@ -98,7 +98,7 @@ router.delete("/:id", authMiddleware, async (req, res) => {
 });
 
 module.exports = router;
-// GET tâches assignées à l'utilisateur connecté (dashboard F4)
+// GET tâches assignées à l'utilisateur connecté 
 router.get("/assigned/me", authMiddleware, async (req, res) => {
   try {
     const tasks = await Task.find({ assignedTo: req.user.id })
